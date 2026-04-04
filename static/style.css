@@ -58,6 +58,11 @@ body {
   align-items: center;
   gap: 14px;
   padding: 0;
+  position: relative;
+}
+
+.brand-lockup .topbar-options-btn {
+  margin-left: 10px;
 }
 
 .brand-logo {
@@ -758,17 +763,6 @@ button:active {
 }
 
 @media (max-width: 700px) {
-  #panel-calc {
-    position: relative;
-  }
-
-  #panel-calc .calc-options-btn-compact {
-    position: absolute !important;
-    top: 8px;
-    right: 8px;
-    z-index: 25;
-  }
-
   body {
     height: 100dvh;
     overflow: hidden;
@@ -786,8 +780,19 @@ button:active {
   .brand-lockup {
     gap: 8px;
     padding: 0;
+    padding-right: 112px;
     min-width: 0;
     flex: 1;
+  }
+
+  .brand-lockup .topbar-options-btn {
+    position: absolute !important;
+    top: 0;
+    right: 0;
+    z-index: 26;
+    margin-left: 0;
+    padding: 7px 10px !important;
+    font-size: 0.75rem !important;
   }
 
   .brand-logo {
@@ -1262,6 +1267,10 @@ button:active {
     padding: 6px 8px !important;
     font-size: 0.7rem !important;
     gap: 3px !important;
+  }
+
+  .brand-lockup {
+    padding-right: 98px;
   }
 
   .calc-options-btn-compact .opts-text {

@@ -13,6 +13,11 @@
         <div class="brand-copy">
           <h1>calculadora oc</h1>
         </div>
+        <button id="calc-options-btn" class="detail-btn calc-options-trigger calc-options-btn-compact topbar-options-btn" type="button" aria-label="Abrir opciones de conversion">
+          <span class="opts-icon">⚙</span>
+          <span class="opts-text">Opciones</span>
+          <span id="calc-options-badge" class="opts-badge"></span>
+        </button>
       </div>
 
       <nav class="tabs-shell" aria-label="Secciones de la app">
@@ -55,11 +60,6 @@
                 <option value="8">OCT(8)</option>
             </select>
           </label>
-          <button id="calc-options-btn" class="detail-btn calc-options-trigger calc-options-btn-compact" type="button" aria-label="Abrir opciones de conversion">
-            <span class="opts-icon">⚙</span>
-            <span class="opts-text">Opciones</span>
-            <span id="calc-options-badge" class="opts-badge"></span>
-          </button>
         </div>
 
         <dialog id="calc-options-modal" class="rounding-modal calc-options-modal" aria-label="Opciones de conversion">
