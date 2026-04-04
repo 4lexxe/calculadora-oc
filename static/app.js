@@ -76,7 +76,23 @@ function updateCalcLayout() {
 
   const panelHeight = panel.getBoundingClientRect().height || getViewportHeight();
   const gap = Number.parseFloat(window.getComputedStyle(panel).rowGap || window.getComputedStyle(panel).gap || "0") || 0;
-  const visibleItems = Array.from(panel.children).filter((element) => element !== mainGrid && element.getClientRects().length > 0);
+  const visibleItems = Array.from(panel.children).filter((element) => {
+    if (element === mainGrid || element.getClientRects().length === 0) {
+      return false;
+    }
+
+    // Dialogs y elementos fijos/absolutos no deben influir en la altura disponible del teclado.
+    if (element.tagName === "DIALOG") {
+      return false;
+    }
+
+    const position = window.getComputedStyle(element).position;
+    if (position === "fixed" || position === "absolute") {
+      return false;
+    }
+
+    return true;
+  });
   const otherHeight = visibleItems.reduce((total, element) => total + getOuterHeight(element), 0);
   const remainingHeight = Math.max(0, Math.floor(panelHeight - otherHeight - (gap * visibleItems.length)));
 
@@ -517,10 +533,6 @@ function initCalculator() {
       updateOptionsIndicator();
       runCalcAll(false);
     });
-  });
-
-  document.querySelectorAll(".usar-btn").forEach((btn) => {
-    btn.addEventListener("click", () => useOutputAsInput(btn.dataset.out));
   });
 
   document.querySelectorAll(".key[data-key]").forEach((btn) => {
