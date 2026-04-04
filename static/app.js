@@ -143,6 +143,17 @@ function clearCalcOutputs() {
   });
 }
 
+function syncToggleButtonsState() {
+  document.querySelectorAll(".toggle-btn").forEach((label) => {
+    const checkbox = label.querySelector('input[type="checkbox"]');
+    if (!checkbox) {
+      return;
+    }
+
+    label.classList.toggle("is-on", checkbox.checked);
+  });
+}
+
 function resetCalcOptions() {
   const checkboxDefaults = {
     "calc-redondear": true,
@@ -183,6 +194,7 @@ function resetCalcOptions() {
     }
   });
 
+  syncToggleButtonsState();
   updateOptionsIndicator();
 }
 
@@ -662,8 +674,9 @@ function initToggleButtons() {
     };
 
     checkbox.addEventListener("change", sync);
-    sync();
   });
+
+  syncToggleButtonsState();
 }
 
 function initRoundingModal() {
