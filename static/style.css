@@ -953,7 +953,7 @@ button:active {
 
   .calc-entry-row {
     display: grid;
-    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 0.5fr);
     align-items: end;
     gap: 8px;
     margin-bottom: 12px;
