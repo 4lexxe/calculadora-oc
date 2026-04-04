@@ -40,6 +40,59 @@ const OUTPUT_IDS = {
 };
 
 let calcStatusTimer = null;
+let calcLayoutRaf = null;
+
+function getOuterHeight(element) {
+  if (!element) {
+    return 0;
+  }
+
+  const rect = element.getBoundingClientRect();
+  const styles = window.getComputedStyle(element);
+  const marginTop = Number.parseFloat(styles.marginTop) || 0;
+  const marginBottom = Number.parseFloat(styles.marginBottom) || 0;
+  return rect.height + marginTop + marginBottom;
+}
+
+function getViewportHeight() {
+  return Math.round(window.visualViewport?.height || window.innerHeight || 0);
+}
+
+function updateCalcLayout() {
+  const panel = byId("panel-calc");
+  const mainGrid = document.querySelector("#panel-calc .calc-main-grid");
+  if (!panel || !mainGrid || !panel.classList.contains("active")) {
+    if (mainGrid) {
+      mainGrid.style.height = "";
+    }
+    return;
+  }
+
+  const isMobile = window.matchMedia("(max-width: 700px)").matches;
+  if (!isMobile) {
+    mainGrid.style.height = "";
+    return;
+  }
+
+  const panelHeight = panel.getBoundingClientRect().height || getViewportHeight();
+  const gap = Number.parseFloat(window.getComputedStyle(panel).rowGap || window.getComputedStyle(panel).gap || "0") || 0;
+  const visibleItems = Array.from(panel.children).filter((element) => element !== mainGrid && element.getClientRects().length > 0);
+  const otherHeight = visibleItems.reduce((total, element) => total + getOuterHeight(element), 0);
+  const remainingHeight = Math.max(0, Math.floor(panelHeight - otherHeight - (gap * visibleItems.length)));
+
+  mainGrid.style.height = `${remainingHeight}px`;
+}
+
+function scheduleCalcLayoutUpdate() {
+  if (calcLayoutRaf) {
+    cancelAnimationFrame(calcLayoutRaf);
+  }
+
+  calcLayoutRaf = requestAnimationFrame(() => {
+    calcLayoutRaf = null;
+    updateCalcLayout();
+  });
+}
 
 function setCalcStatus(text, isError = false) {
   const status = byId("calc-status");
@@ -294,6 +347,7 @@ function useOutputAsInput(baseName) {
   byId("calc-base-origen").value = String(BASES[baseName]);
   byId("calc-numero").value = value;
   refreshKeypadByBase();
+  scheduleCalcLayoutUpdate();
   setCalcStatus(`Tomando ${baseName} como nueva entrada.`);
 }
 
@@ -351,6 +405,7 @@ async function runCalcAll(forceResolveExpression = false) {
 function initCalculator() {
   byId("calc-base-origen").addEventListener("change", () => {
     refreshKeypadByBase();
+    scheduleCalcLayoutUpdate();
     runCalcAll(false);
   });
 
@@ -451,6 +506,7 @@ function initCalculator() {
 
   refreshKeypadByBase();
   setCalcStatus("Listo. Escribe un numero y se convierte a todas las bases.");
+  scheduleCalcLayoutUpdate();
 }
 
 function initTabs() {
@@ -505,6 +561,8 @@ function initTabs() {
         tabsShell.classList.remove("open");
         menuBtn.setAttribute("aria-expanded", "false");
       }
+
+      scheduleCalcLayoutUpdate();
     });
   });
 }
@@ -573,6 +631,8 @@ function initCalcOptionsDefaultState() {
 
   const isMobile = window.matchMedia("(max-width: 700px)").matches;
   options.open = !isMobile;
+  options.addEventListener("toggle", scheduleCalcLayoutUpdate);
+  scheduleCalcLayoutUpdate();
 }
 
 function initActions() {
@@ -622,3 +682,7 @@ initRoundingModal();
 initCalcOptionsDefaultState();
 initCalculator();
 initActions();
+
+window.addEventListener("resize", scheduleCalcLayoutUpdate);
+window.addEventListener("orientationchange", scheduleCalcLayoutUpdate);
+window.visualViewport?.addEventListener("resize", scheduleCalcLayoutUpdate);
