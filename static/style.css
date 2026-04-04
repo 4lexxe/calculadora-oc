@@ -693,6 +693,73 @@ button:active {
   background: linear-gradient(145deg, #57363b, #3e2428);
 }
 
+.welcome-modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+  width: min(92vw, 760px);
+}
+
+.welcome-modal::backdrop {
+  background: rgba(3, 7, 12, 0.72);
+  backdrop-filter: blur(3px);
+}
+
+.welcome-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 260px) minmax(0, 1fr);
+  gap: 18px;
+  align-items: center;
+  border: 1px solid #5f7690;
+  border-radius: 22px;
+  background: linear-gradient(145deg, #223041, #151d28);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.42);
+  padding: 18px;
+  color: #eef5fb;
+}
+
+.welcome-image {
+  width: 100%;
+  max-width: 260px;
+  justify-self: center;
+  border-radius: 18px;
+  background: linear-gradient(180deg, #f5f8fb 0%, #d9e2ea 100%);
+  padding: 12px;
+  box-shadow:
+    inset 4px 4px 10px rgba(255, 255, 255, 0.18),
+    inset -4px -4px 10px rgba(0, 0, 0, 0.14),
+    0 8px 18px rgba(0, 0, 0, 0.24);
+}
+
+.welcome-copy {
+  display: grid;
+  gap: 10px;
+}
+
+.welcome-kicker {
+  margin: 0;
+  color: #9fc4e6;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.welcome-copy h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.welcome-copy p {
+  margin: 0;
+  color: #d7e4ef;
+}
+
+.welcome-close-btn {
+  justify-self: start;
+  min-width: 160px;
+  margin-top: 6px;
+}
+
 .rounding-modal {
   border: none;
   padding: 0;
@@ -1069,6 +1136,25 @@ button:active {
 }
 
 @media (max-width: 400px) {
+  .welcome-card {
+    grid-template-columns: 1fr;
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .welcome-image {
+    max-width: 210px;
+  }
+
+  .welcome-copy h2 {
+    font-size: 1.15rem;
+  }
+
+  .welcome-close-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
   .topbar {
     padding: 8px 6px;
   }
@@ -1191,6 +1277,10 @@ button:active {
 }
 
 @media (max-width: 360px) {
+  .welcome-card {
+    padding: 12px;
+  }
+
   .topbar {
     padding: 6px 5px;
     gap: 6px;

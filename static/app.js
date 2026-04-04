@@ -143,6 +143,49 @@ function clearCalcOutputs() {
   });
 }
 
+function resetCalcOptions() {
+  const checkboxDefaults = {
+    "calc-redondear": true,
+    "calc-entrada-comp": false,
+    "calc-nc-fijo": false,
+    "calc-complemento": false,
+  };
+
+  Object.entries(checkboxDefaults).forEach(([id, value]) => {
+    const element = byId(id);
+    if (element) {
+      element.checked = value;
+    }
+  });
+
+  const selectDefaults = {
+    "calc-separador": ",",
+    "calc-base-nc": "10",
+  };
+
+  Object.entries(selectDefaults).forEach(([id, value]) => {
+    const element = byId(id);
+    if (element) {
+      element.value = value;
+    }
+  });
+
+  const numberDefaults = {
+    "calc-e": "5",
+    "calc-f": "2",
+    "calc-precision": "4",
+  };
+
+  Object.entries(numberDefaults).forEach(([id, value]) => {
+    const element = byId(id);
+    if (element) {
+      element.value = value;
+    }
+  });
+
+  updateOptionsIndicator();
+}
+
 
 function getAllowedDigits(baseNumber) {
   if (baseNumber === 2) {
@@ -338,7 +381,7 @@ async function copyText(text) {
   }
 }
 
-function useOutputAsInput(baseName) {
+async function useOutputAsInput(baseName) {
   const value = byId(OUTPUT_IDS[baseName]).value;
   if (!value) {
     setCalcStatus("No hay resultado en esa base.", true);
@@ -348,7 +391,9 @@ function useOutputAsInput(baseName) {
   byId("calc-numero").value = value;
   refreshKeypadByBase();
   scheduleCalcLayoutUpdate();
-  setCalcStatus(`Tomando ${baseName} como nueva entrada.`);
+  resetCalcOptions();
+  await runCalcAll(false);
+  setCalcStatus("Opciones reseteadas.");
 }
 
 async function runCalcAll(forceResolveExpression = false) {
@@ -398,7 +443,11 @@ async function runCalcAll(forceResolveExpression = false) {
   Object.entries(OUTPUT_IDS).forEach(([key, id]) => {
     byId(id).value = data.resultados[key] || "";
   });
-  setCalcStatus("Conversion actualizada en DEC, BIN, HEX y OCT.");
+  if (data.aviso) {
+    setCalcStatus(data.aviso);
+  } else {
+    setCalcStatus("Conversion actualizada en DEC, BIN, HEX y OCT.");
+  }
 }
 
 
@@ -706,6 +755,41 @@ function initCalcOptionsModal() {
   });
 }
 
+function initWelcomeModal() {
+  const modal = byId("welcome-modal");
+  const closeButton = byId("welcome-close");
+
+  if (!modal || !closeButton) {
+    return;
+  }
+
+  const closeModal = () => {
+    if (modal.open) {
+      modal.close();
+    }
+  };
+
+  closeButton.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (event) => {
+    const rect = modal.getBoundingClientRect();
+    const clickedBackdrop = (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    );
+
+    if (clickedBackdrop) {
+      closeModal();
+    }
+  });
+
+  requestAnimationFrame(() => {
+    modal.showModal();
+  });
+}
+
 function initActions() {
   byId("nc2nc-run").addEventListener("click", async () => {
     const payload = {
@@ -719,6 +803,12 @@ function initActions() {
       separador: byId("nc2nc-sep").value,
     };
     showOutput("nc2nc-out", await postJson("/api/nc2nc", payload));
+  });
+
+  document.querySelectorAll(".usar-btn").forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      await useOutputAsInput(btn.dataset.out);
+    });
   });
 
   byId("nc2cs-run").addEventListener("click", async () => {
@@ -751,6 +841,7 @@ initTabs();
 initToggleButtons();
 initRoundingModal();
 initCalcOptionsModal();
+initWelcomeModal();
 initCalculator();
 initActions();
 

@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="/static/style.css" />
   </head>
   <body>
+    <dialog id="welcome-modal" class="welcome-modal" aria-label="Bienvenida a la calculadora">
+      <div class="welcome-card">
+        <img class="welcome-image" src="/static/images/welcome.png" alt="DEVs Project OC Help" />
+        <div class="welcome-copy">
+          <p class="welcome-kicker">Propósito de la herramienta</p>
+          <h2>Bienvenido a OC Help</h2>
+          <p>
+            DEVs Project creó esta herramienta para estudiantes que necesitan resolver ejercicios de bases,
+            complementos y operaciones NC de forma clara y rápida.
+          </p>
+          <p>
+            Las opciones necesarias para ajustar la resolución están en el botón <strong>Opciones</strong>.
+          </p>
+          <button id="welcome-close" class="detail-btn welcome-close-btn" type="button">Comenzar</button>
+        </div>
+      </div>
+    </dialog>
+
     <header class="topbar">
       <div class="brand-lockup">
         <img class="brand-logo" src="/static/images/logo.png" alt="DEVs Project" />

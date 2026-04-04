@@ -753,6 +753,8 @@ def api_convert_all():
             )
             complemento = None
 
+        aviso = "Entrada complementada detectada. Se ajustaron las opciones necesarias." if entrada_ya_comp else None
+
         bases = {"DEC": 10, "BIN": 2, "HEX": 16, "OCT": 8}
         resultados = {}
 
@@ -788,6 +790,7 @@ def api_convert_all():
                 "entrada_normalizada": numero,
                 "abreviacion": _abreviacion_nc(numero, base_origen, separador),
                 "resultados": resultados,
+                "aviso": aviso,
             }
         )
     except ConversionError as exc:
@@ -830,6 +833,8 @@ def api_manual_target():
                 fracc_fijas=fracc_fijas,
             )
             complemento = None
+
+        aviso = "Entrada complementada detectada. Se ajustaron las opciones necesarias." if entrada_ya_comp else None
 
         min_precision_exacta = _precision_minima_exacta(numero, base_origen, base_dest)
         respetar_precision_objetivo = nc_fijo or entrada_ya_comp
@@ -891,6 +896,7 @@ def api_manual_target():
             "resultado": resultado,
             "detalle": detalle,
             "detalle_data": detalle_data,
+            "aviso": aviso,
         })
     except ConversionError as exc:
         return jsonify({"ok": False, "error": str(exc)}), 400
