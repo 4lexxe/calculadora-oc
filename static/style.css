@@ -178,6 +178,45 @@ h3 {
   margin-bottom: 10px;
 }
 
+.calc-options-btn-compact {
+  width: auto !important;
+  min-width: 48px !important;
+  height: 48px !important;
+  padding: 0 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  font-size: 0.85rem !important;
+  position: relative !important;
+  flex: 0 0 auto !important;
+}
+
+.calc-options-btn-compact .opts-icon {
+  display: inline-block;
+  font-size: 1.1rem;
+}
+
+.calc-options-btn-compact .opts-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: #ff6b6b;
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 2px 4px;
+  border-radius: 10px;
+  min-width: 18px;
+  text-align: center;
+  z-index: 10;
+  display: none;
+}
+
+.calc-options-btn-compact .opts-badge.active {
+  display: block;
+}
+
 .calc-options-modal {
   width: min(92vw, 480px);
   max-height: 85dvh;

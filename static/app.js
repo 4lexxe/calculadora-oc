@@ -402,6 +402,33 @@ async function runCalcAll(forceResolveExpression = false) {
 }
 
 
+function updateOptionsIndicator() {
+  const badge = byId("calc-options-badge");
+  if (!badge) {
+    return;
+  }
+
+  const activeOptions = [];
+
+  if (byId("calc-entrada-comp").checked) {
+    activeOptions.push("A");
+  }
+  if (byId("calc-nc-fijo").checked) {
+    activeOptions.push("N");
+  }
+  if (byId("calc-complemento").checked) {
+    activeOptions.push("C");
+  }
+
+  if (activeOptions.length > 0) {
+    badge.classList.add("active");
+    badge.textContent = activeOptions.length;
+  } else {
+    badge.classList.remove("active");
+    badge.textContent = "";
+  }
+}
+
 function initCalculator() {
   byId("calc-base-origen").addEventListener("change", () => {
     refreshKeypadByBase();
@@ -421,8 +448,14 @@ function initCalculator() {
     "calc-f",
     "calc-complemento",
   ].forEach((id) => {
-    byId(id).addEventListener("input", () => runCalcAll(false));
-    byId(id).addEventListener("change", () => runCalcAll(false));
+    byId(id).addEventListener("input", () => {
+      updateOptionsIndicator();
+      runCalcAll(false);
+    });
+    byId(id).addEventListener("change", () => {
+      updateOptionsIndicator();
+      runCalcAll(false);
+    });
   });
 
   document.querySelectorAll(".usar-btn").forEach((btn) => {
@@ -506,6 +539,7 @@ function initCalculator() {
 
   refreshKeypadByBase();
   setCalcStatus("Listo. Escribe un numero y se convierte a todas las bases.");
+  updateOptionsIndicator();
   scheduleCalcLayoutUpdate();
 }
 

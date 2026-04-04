@@ -45,9 +45,21 @@
       <section class="panel active" id="panel-calc">
         <h2>Calculadora de Conversion</h2>
 
-        <button id="calc-options-btn" class="detail-btn calc-modal-btn calc-options-trigger" type="button">
-          Opciones de conversion
-        </button>
+        <div class="calc-entry-row">
+          <label class="grow">Entrada <input id="calc-numero" type="text" placeholder="Escribe un numero" /></label>
+          <label>Base
+            <select id="calc-base-origen">
+                <option value="10">DEC(10)</option>
+                <option value="2">BIN(2)</option>
+                <option value="16">HEX(16)</option>
+                <option value="8">OCT(8)</option>
+            </select>
+          </label>
+          <button id="calc-options-btn" class="detail-btn calc-options-trigger calc-options-btn-compact" type="button" aria-label="Abrir opciones de conversion">
+            <span class="opts-icon">⚙</span>
+            <span id="calc-options-badge" class="opts-badge"></span>
+          </button>
+        </div>
 
         <dialog id="calc-options-modal" class="rounding-modal calc-options-modal" aria-label="Opciones de conversion">
           <div class="rounding-modal-card calc-options-modal-card">
@@ -93,17 +105,7 @@
           </div>
         </dialog>
 
-        <div class="calc-entry-row">
-          <label class="grow">Entrada <input id="calc-numero" type="text" placeholder="Escribe un numero" /></label>
-          <label>Base
-            <select id="calc-base-origen">
-                <option value="10">DEC(10)</option>
-                <option value="2">BIN(2)</option>
-                <option value="16">HEX(16)</option>
-                <option value="8">OCT(8)</option>
-            </select>
-          </label>
-        </div>
+
 
         <div class="calc-main-grid">
           <div class="calc-outputs">
