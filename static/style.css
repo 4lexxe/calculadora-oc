@@ -246,6 +246,29 @@ h3 {
   width: 100%;
 }
 
+.nc-fijo-options {
+  grid-column: 1 / -1;
+  border: 1px solid #52657c !important;
+  border-radius: 6px !important;
+  padding: 10px !important;
+  background: rgba(23, 29, 39, 0.5);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.nc-fijo-options legend {
+  grid-column: 1 / -1;
+  padding: 0 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.nc-fijo-options > label {
+  width: 100%;
+}
+
 .calc-options {
   border: 1px solid #52657c;
   border-radius: 20px;

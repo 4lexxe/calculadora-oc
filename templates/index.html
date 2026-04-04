@@ -69,26 +69,30 @@
               <button id="calc-options-close" class="modal-close-btn" type="button" aria-label="Cerrar">×</button>
             </div>
             <div class="rounding-modal-body calc-options-modal-body">
+              <label class="inline toggle-btn"><input id="calc-complemento" type="checkbox" /> Aplicar complemento</label>
+              <label class="inline toggle-btn"><input id="calc-entrada-comp" type="checkbox" /> Valor ya complementado</label>
               <button id="rounding-modal-btn" class="detail-btn calc-modal-btn" type="button">Redondeo</button>
+              <fieldset id="nc-fijo-group" class="nc-fijo-options" style="border: 1px solid #ccd1d8; padding: 10px; border-radius: 6px; margin: 8px 0;">
+                <legend style="padding: 0 8px; font-weight: 600; font-size: 0.9rem;">
+                  <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> NC fijo</label>
+                </legend>
+                <label>Base NC
+                  <select id="calc-base-nc">
+                    <option value="10">DEC(10)</option>
+                    <option value="2">BIN(2)</option>
+                    <option value="16">HEX(16)</option>
+                    <option value="8">OCT(8)</option>
+                  </select>
+                </label>
+                <label>E <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
+                <label>F <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
+              </fieldset>
               <label>Sep.
                 <select id="calc-separador">
                   <option value=",">,</option>
                   <option value=".">.</option>
                 </select>
               </label>
-              <label class="inline toggle-btn"><input id="calc-entrada-comp" type="checkbox" /> Valor ya complementado</label>
-              <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> NC fijo</label>
-              <label>Base NC
-                <select id="calc-base-nc">
-                  <option value="10">DEC(10)</option>
-                  <option value="2">BIN(2)</option>
-                  <option value="16">HEX(16)</option>
-                  <option value="8">OCT(8)</option>
-                </select>
-              </label>
-              <label>E <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
-              <label>F <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
-              <label class="inline toggle-btn"><input id="calc-complemento" type="checkbox" /> Aplicar complemento</label>
             </div>
           </div>
         </dialog>
