@@ -962,7 +962,7 @@ button:active {
     align-items: end;
     gap: 8px;
     margin-bottom: 12px;
-    margin-top: 44px;
+    margin-top: 0;
   }
 
   .calc-entry-row .grow {
@@ -1122,7 +1122,7 @@ button:active {
   .calc-entry-row {
     gap: 6px;
     margin-bottom: 8px;
-    margin-top: 42px;
+    margin-top: 0;
   }
 
   .calc-entry-row .grow {
@@ -1239,7 +1239,7 @@ button:active {
   .calc-entry-row {
     gap: 4px;
     margin-bottom: 6px;
-    margin-top: 38px;
+    margin-top: 0;
   }
 
   .calc-entry-row .grow {
