@@ -45,31 +45,40 @@
       <section class="panel active" id="panel-calc">
         <h2>Calculadora de Conversion</h2>
 
-        <details id="calc-options" class="calc-options">
-          <summary>Opciones de conversion</summary>
-          <div class="calc-controls">
-            <button id="rounding-modal-btn" class="detail-btn calc-modal-btn" type="button">Redondeo</button>
-            <label>Sep.
-              <select id="calc-separador">
-                <option value=",">,</option>
-                <option value=".">.</option>
-              </select>
-            </label>
-            <label class="inline toggle-btn"><input id="calc-entrada-comp" type="checkbox" /> Valor ya complementado</label>
-            <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> NC fijo</label>
-            <label>Base NC
-              <select id="calc-base-nc">
-                <option value="10">DEC(10)</option>
-                <option value="2">BIN(2)</option>
-                <option value="16">HEX(16)</option>
-                <option value="8">OCT(8)</option>
-              </select>
-            </label>
-            <label>E <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
-            <label>F <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
-            <label class="inline toggle-btn"><input id="calc-complemento" type="checkbox" /> Aplicar complemento</label>
+        <button id="calc-options-btn" class="detail-btn calc-modal-btn calc-options-trigger" type="button">
+          Opciones de conversion
+        </button>
+
+        <dialog id="calc-options-modal" class="rounding-modal calc-options-modal" aria-label="Opciones de conversion">
+          <div class="rounding-modal-card calc-options-modal-card">
+            <div class="rounding-modal-header">
+              <h3>Opciones de conversion</h3>
+              <button id="calc-options-close" class="modal-close-btn" type="button" aria-label="Cerrar">×</button>
+            </div>
+            <div class="rounding-modal-body calc-options-modal-body">
+              <button id="rounding-modal-btn" class="detail-btn calc-modal-btn" type="button">Redondeo</button>
+              <label>Sep.
+                <select id="calc-separador">
+                  <option value=",">,</option>
+                  <option value=".">.</option>
+                </select>
+              </label>
+              <label class="inline toggle-btn"><input id="calc-entrada-comp" type="checkbox" /> Valor ya complementado</label>
+              <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> NC fijo</label>
+              <label>Base NC
+                <select id="calc-base-nc">
+                  <option value="10">DEC(10)</option>
+                  <option value="2">BIN(2)</option>
+                  <option value="16">HEX(16)</option>
+                  <option value="8">OCT(8)</option>
+                </select>
+              </label>
+              <label>E <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
+              <label>F <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
+              <label class="inline toggle-btn"><input id="calc-complemento" type="checkbox" /> Aplicar complemento</label>
+            </div>
           </div>
-        </details>
+        </dialog>
 
         <dialog id="rounding-modal" class="rounding-modal" aria-label="Opciones de redondeo">
           <div class="rounding-modal-card">

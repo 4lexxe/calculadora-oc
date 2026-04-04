@@ -623,16 +623,53 @@ function initRoundingModal() {
   });
 }
 
-function initCalcOptionsDefaultState() {
-  const options = byId("calc-options");
-  if (!options) {
+function initCalcOptionsModal() {
+  const modal = byId("calc-options-modal");
+  const openButton = byId("calc-options-btn");
+  const closeButton = byId("calc-options-close");
+
+  if (!modal || !openButton || !closeButton) {
     return;
   }
 
-  const isMobile = window.matchMedia("(max-width: 700px)").matches;
-  options.open = !isMobile;
-  options.addEventListener("toggle", scheduleCalcLayoutUpdate);
-  scheduleCalcLayoutUpdate();
+  const closeModal = () => {
+    if (modal.open) {
+      modal.close();
+      openButton.setAttribute("aria-expanded", "false");
+    }
+  };
+
+  openButton.setAttribute("aria-expanded", "false");
+
+  openButton.addEventListener("click", () => {
+    if (modal.open) {
+      closeModal();
+      return;
+    }
+
+    modal.showModal();
+    openButton.setAttribute("aria-expanded", "true");
+  });
+
+  closeButton.addEventListener("click", closeModal);
+
+  modal.addEventListener("click", (event) => {
+    const rect = modal.getBoundingClientRect();
+    const clickedBackdrop = (
+      event.clientX < rect.left ||
+      event.clientX > rect.right ||
+      event.clientY < rect.top ||
+      event.clientY > rect.bottom
+    );
+
+    if (clickedBackdrop) {
+      closeModal();
+    }
+  });
+
+  modal.addEventListener("close", () => {
+    openButton.setAttribute("aria-expanded", "false");
+  });
 }
 
 function initActions() {
@@ -679,7 +716,7 @@ function initActions() {
 initTabs();
 initToggleButtons();
 initRoundingModal();
-initCalcOptionsDefaultState();
+initCalcOptionsModal();
 initCalculator();
 initActions();
 
