@@ -910,7 +910,7 @@ button:active {
   }
 }
 
-@media (max-width: 399px) {
+@media (max-width: 400px) {
   .topbar {
     padding: 8px 6px;
   }
@@ -935,6 +935,10 @@ button:active {
     width: min(220px, calc(100vw - 12px));
   }
 
+  .content {
+    height: calc(100dvh - 74px);
+  }
+
   .rounding-modal {
     width: calc(100vw - 12px);
   }
@@ -952,7 +956,15 @@ button:active {
     grid-template-columns: 46px 1fr 50px;
   }
 
+  #calc-numero {
+    min-height: 52px;
+    font-size: 1.2rem;
+    padding: 8px;
+  }
+
   .out-row input {
+    min-height: 34px;
+    font-size: 0.88rem;
     min-width: 0;
   }
 
@@ -964,12 +976,154 @@ button:active {
   }
 
   .calc-keypad {
-    grid-auto-rows: minmax(40px, 1fr);
+    grid-auto-rows: minmax(38px, 1fr);
   }
 
   .key {
-    min-height: 40px;
-    font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+    min-height: 38px;
+    font-size: clamp(0.76rem, 3.1vw, 0.88rem);
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar {
+    padding: 6px 5px;
+    gap: 6px;
+  }
+
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+    padding: 3px;
+    border-radius: 12px;
+  }
+
+  .topbar h1 {
+    font-size: 0.9rem;
+  }
+
+  .tabs-menu-btn {
+    min-width: 84px;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+  }
+
+  .content {
+    height: calc(100dvh - 68px);
+  }
+
+  .panel {
+    padding: 6px 5px;
+    min-height: calc(100dvh - 84px);
+  }
+
+  #panel-calc.panel.active {
+    gap: 4px;
+    grid-template-rows: auto auto auto minmax(0, 1fr) auto;
+  }
+
+  .calc-options summary {
+    padding: 6px 7px;
+    font-size: 0.84rem;
+  }
+
+  .calc-controls > label,
+  .grid > label {
+    min-height: 56px;
+    padding: 5px;
+    font-size: 0.84rem;
+  }
+
+  .calc-controls > label.inline,
+  .grid > label.inline {
+    min-height: 38px;
+  }
+
+  .calc-modal-btn {
+    min-height: 56px;
+    font-size: 0.82rem;
+    padding: 4px;
+  }
+
+  #calc-numero {
+    min-height: 46px;
+    font-size: 1.02rem;
+    padding: 7px;
+  }
+
+  .out-row {
+    grid-template-columns: 40px 1fr 44px;
+    gap: 3px;
+  }
+
+  .out-row input {
+    min-height: 32px;
+    font-size: 0.82rem;
+    padding: 3px;
+  }
+
+  .tag {
+    font-size: 0.58rem;
+    border-radius: 10px;
+  }
+
+  .usar-btn {
+    font-size: 0.56rem;
+    padding: 1px;
+  }
+
+  .calc-keypad {
+    grid-auto-rows: minmax(34px, 1fr);
+    padding: 3px;
+    gap: 3px;
+    overflow-y: hidden;
+  }
+
+  .key {
+    min-height: 34px;
+    font-size: 0.74rem;
+    border-radius: 10px;
+    padding: 0 2px;
+  }
+}
+
+@media (max-width: 300px) {
+  .brand-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .topbar h1 {
+    font-size: 0.78rem;
+  }
+
+  .tabs-menu-btn {
+    min-width: 74px;
+    padding: 5px 7px;
+    font-size: 0.74rem;
+  }
+
+  #calc-numero {
+    min-height: 44px;
+    font-size: 0.98rem;
+  }
+
+  .out-row {
+    grid-template-columns: 36px 1fr 40px;
+  }
+
+  .out-row input {
+    min-height: 30px;
+    font-size: 0.76rem;
+  }
+
+  .calc-keypad {
+    grid-auto-rows: minmax(31px, 1fr);
+  }
+
+  .key {
+    min-height: 31px;
+    font-size: 0.68rem;
   }
 }
 
