@@ -92,7 +92,7 @@
               <button id="rounding-modal-btn" class="detail-btn calc-modal-btn" type="button">Redondeo</button>
               <fieldset id="nc-fijo-group" class="nc-fijo-options" style="border: 1px solid #ccd1d8; padding: 10px; border-radius: 6px; margin: 8px 0;">
                 <legend style="padding: 0 8px; font-weight: 600; font-size: 0.9rem;">
-                  <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> NC fijo</label>
+                  <label class="inline toggle-btn"><input id="calc-nc-fijo" type="checkbox" /> Ver como notacion complemento fijo</label>
                 </legend>
                 <label>Base NC
                   <select id="calc-base-nc">
@@ -102,8 +102,8 @@
                     <option value="8">OCT(8)</option>
                   </select>
                 </label>
-                <label>E <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
-                <label>F <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
+                <label>Parte entera <input id="calc-e" type="number" min="1" max="32" value="5" /></label>
+                <label>Parte fraccionaria <input id="calc-f" type="number" min="0" max="16" value="2" /></label>
               </fieldset>
               <label>Sep.
                 <select id="calc-separador">
@@ -191,15 +191,15 @@
       </section>
 
       <section class="panel" id="panel-nc2nc">
-        <h2>NC fijo -> NC fijo</h2>
+        <h2>Ver como notacion complemento fijo</h2>
         <div class="grid">
           <label>Entrada comp. <input id="nc2nc-numero" type="text" placeholder="Ej: 1F4A2,5C93" /></label>
           <label>Base origen <input id="nc2nc-bo" type="number" min="2" max="36" value="16" /></label>
-          <label>E origen <input id="nc2nc-eo" type="number" min="1" value="5" /></label>
-          <label>F origen <input id="nc2nc-fo" type="number" min="0" value="4" /></label>
+          <label>Parte entera origen <input id="nc2nc-eo" type="number" min="1" value="5" /></label>
+          <label>Parte fraccionaria origen <input id="nc2nc-fo" type="number" min="0" value="4" /></label>
           <label>Base destino <input id="nc2nc-bd" type="number" min="2" max="36" value="8" /></label>
-          <label>E destino <input id="nc2nc-ed" type="number" min="1" value="6" /></label>
-          <label>F destino <input id="nc2nc-fd" type="number" min="0" value="3" /></label>
+          <label>Parte entera destino <input id="nc2nc-ed" type="number" min="1" value="6" /></label>
+          <label>Parte fraccionaria destino <input id="nc2nc-fd" type="number" min="0" value="3" /></label>
           <label>Separador
             <select id="nc2nc-sep">
               <option value=",">,</option>
@@ -216,8 +216,8 @@
         <div class="grid">
           <label>Entrada comp. <input id="nc2cs-numero" type="text" placeholder="Ej: 1F4A2,5C93" /></label>
           <label>Base <input id="nc2cs-base" type="number" min="2" max="36" value="16" /></label>
-          <label>E <input id="nc2cs-e" type="number" min="1" value="5" /></label>
-          <label>F <input id="nc2cs-f" type="number" min="0" value="4" /></label>
+          <label>Parte entera <input id="nc2cs-e" type="number" min="1" value="5" /></label>
+          <label>Parte fraccionaria <input id="nc2cs-f" type="number" min="0" value="4" /></label>
           <label>Separador
             <select id="nc2cs-sep">
               <option value=",">,</option>
@@ -235,8 +235,8 @@
           <label>N1 (comp.) <input id="suma-n1" type="text" /></label>
           <label>N2 (comp.) <input id="suma-n2" type="text" /></label>
           <label>Base <input id="suma-base" type="number" min="2" max="36" value="10" /></label>
-          <label>E <input id="suma-e" type="number" min="1" value="5" /></label>
-          <label>F <input id="suma-f" type="number" min="0" value="2" /></label>
+          <label>Parte entera <input id="suma-e" type="number" min="1" value="5" /></label>
+          <label>Parte fraccionaria <input id="suma-f" type="number" min="0" value="2" /></label>
           <label>Operacion
             <select id="suma-op">
               <option value="suma">N1 + N2</option>

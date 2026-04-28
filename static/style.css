@@ -69,6 +69,7 @@ body {
 
 .brand-lockup .topbar-options-btn {
   margin-left: 10px;
+  display: none;
 }
 
 .brand-logo {
@@ -236,14 +237,21 @@ h3 {
 }
 
 .calc-options-modal {
-  width: min(92vw, 480px);
-  max-height: 85dvh;
+  width: 100%;
+  max-height: none;
+  margin: 0 0 10px;
+  border: none;
+  padding: 0;
+  background: transparent;
 }
 
 .calc-options-modal-card {
-  max-height: calc(85dvh - 40px);
-  overflow-y: auto;
-  overflow-x: hidden;
+  max-height: none;
+  overflow: visible;
+}
+
+.calc-options-modal .modal-close-btn {
+  display: none;
 }
 
 .calc-options-modal-body {
@@ -894,6 +902,7 @@ button:active {
   }
 
   .brand-lockup .topbar-options-btn {
+    display: inline-flex !important;
     position: absolute !important;
     top: 0;
     right: 0;
@@ -1019,6 +1028,24 @@ button:active {
     min-height: 64px;
     font-size: 0.9rem;
     padding: 6px;
+  }
+
+  .calc-options-modal {
+    width: min(96vw, 420px);
+    max-height: 85dvh;
+    margin: 0;
+  }
+
+  .calc-options-modal-card {
+    max-height: calc(85dvh - 40px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .calc-options-modal .modal-close-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .calc-options {

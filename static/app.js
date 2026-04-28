@@ -735,26 +735,52 @@ function initCalcOptionsModal() {
   const modal = byId("calc-options-modal");
   const openButton = byId("calc-options-btn");
   const closeButton = byId("calc-options-close");
+  const mobileQuery = window.matchMedia("(max-width: 700px)");
 
   if (!modal || !openButton || !closeButton) {
     return;
   }
 
-  const closeModal = () => {
+  const syncDesktopMode = () => {
+    if (mobileQuery.matches) {
+      if (modal.hasAttribute("open") && !modal.open) {
+        modal.removeAttribute("open");
+      }
+      openButton.setAttribute("aria-expanded", "false");
+      return;
+    }
+
     if (modal.open) {
+      modal.close();
+    }
+    modal.setAttribute("open", "");
+    openButton.setAttribute("aria-expanded", "true");
+  };
+
+  const closeModal = () => {
+    if (mobileQuery.matches && modal.open) {
       modal.close();
       openButton.setAttribute("aria-expanded", "false");
     }
   };
 
-  openButton.setAttribute("aria-expanded", "false");
+  syncDesktopMode();
+  mobileQuery.addEventListener("change", () => {
+    syncDesktopMode();
+    scheduleCalcLayoutUpdate();
+  });
 
   openButton.addEventListener("click", () => {
+    if (!mobileQuery.matches) {
+      return;
+    }
+
     if (modal.open) {
       closeModal();
       return;
     }
 
+    modal.removeAttribute("open");
     modal.showModal();
     openButton.setAttribute("aria-expanded", "true");
   });
@@ -762,6 +788,10 @@ function initCalcOptionsModal() {
   closeButton.addEventListener("click", closeModal);
 
   modal.addEventListener("click", (event) => {
+    if (!mobileQuery.matches) {
+      return;
+    }
+
     const rect = modal.getBoundingClientRect();
     const clickedBackdrop = (
       event.clientX < rect.left ||
@@ -777,6 +807,7 @@ function initCalcOptionsModal() {
 
   modal.addEventListener("close", () => {
     openButton.setAttribute("aria-expanded", "false");
+    syncDesktopMode();
   });
 }
 
